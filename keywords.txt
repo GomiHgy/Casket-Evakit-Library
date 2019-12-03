@@ -1,0 +1,52 @@
+#######################################
+# Syntax Coloring Map Sample library
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+Casket	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin	KEYWORD2
+end		KEYWORD2
+readSystemID	KEYWORD2
+readTimeCode	KEYWORD2
+readUIDLow	KEYWORD2
+readUIDHigh	KEYWORD2
+readStatusReg	KEYWORD2
+isReady	KEYWORD2
+writeStatusReg	KEYWORD2
+startContinuousMode	KEYWORD2
+startOneshotMode	KEYWORD2
+readControlReg	KEYWORD2
+writeControlReg	KEYWORD2
+resetLedPeripheral	KEYWORD2
+writeScanNum	KEYWORD2
+readBaseScroolReg	KEYWORD2
+writeBaseScroolReg	KEYWORD2
+readBaseBrightnessReg	KEYWORD2
+writeBaseBrightnessReg	KEYWORD2
+readOverlayScroolReg	KEYWORD2
+writeOverlayScroolReg	KEYWORD2
+readOverlayBrightnessReg	KEYWORD2
+writeOverlayBrightnessReg	KEYWORD2
+readFreerunSeedReg	KEYWORD2
+writeFreerunSeedReg	KEYWORD2
+readEffectBrightnessReg	KEYWORD2
+writeEffectBrightnessReg	KEYWORD2
+readBasePixel	KEYWORD2
+writeBasePixel	KEYWORD2
+writeBasePixels	KEYWORD2
+readOverlayPixel	KEYWORD2
+writeOverlayPixel	KEYWORD2
+writeOverlayPixels	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+CASKET_MEM_SIZE_CHANNEL	LITERAL1
+CASKET_MEM_SIZE_LEDCOUNT	LITERAL1
+CASKET_SPI_MAX_SPEED	LITERAL1
