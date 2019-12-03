@@ -10,8 +10,8 @@ union ArrayToInteger {
   uint32_t integer;
 };
 
-void Casket::begin(SPIClass * spi, int pin_ss, int clock_speed) {
-  _spi = spi;
+void Casket::begin(int pin_ss, uint8_t spi_bus, int clock_speed) {
+  _spi = new SPIClass(spi_bus);
   _pin_ss = pin_ss;
   if (clock_speed > CASKET_SPI_MAX_SPEED) {
     clock_speed = CASKET_SPI_MAX_SPEED;
@@ -21,8 +21,8 @@ void Casket::begin(SPIClass * spi, int pin_ss, int clock_speed) {
   _spi->begin();
 }
 
-void Casket::begin(SPIClass * spi, int pin_sck, int8_t pin_miso, int pin_mosi, int pin_ss, int clock_speed) {
-  _spi = spi;
+void Casket::begin(int pin_sck, int8_t pin_miso, int pin_mosi, int pin_ss, uint8_t spi_bus, int clock_speed) {
+  _spi = new SPIClass(spi_bus);
   _pin_ss = pin_ss;
   if (clock_speed > CASKET_SPI_MAX_SPEED) {
     clock_speed = CASKET_SPI_MAX_SPEED;

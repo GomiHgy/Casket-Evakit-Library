@@ -42,8 +42,8 @@
 
 class Casket {
   public:
-    void begin(SPIClass * spi, int pin_ss, int clock_speed = CASKET_SPI_MAX_SPEED);
-    void begin(SPIClass * spi, int pin_sck, int8_t pin_miso, int pin_mosi, int pin_ss, int clock_speed = CASKET_SPI_MAX_SPEED);
+    void begin(int pin_ss, uint8_t spi_bus = HSPI, int clock_speed = CASKET_SPI_MAX_SPEED);
+    void begin(int pin_sck, int8_t pin_miso, int pin_mosi, int pin_ss, uint8_t spi_bus = HSPI, int clock_speed = CASKET_SPI_MAX_SPEED);
     void end();
     uint32_t readSystemID();
     uint32_t readTimeCode();
