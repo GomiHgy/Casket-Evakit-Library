@@ -10,27 +10,39 @@ union ArrayToInteger {
   uint32_t integer;
 };
 
-void Casket::begin(int pin_ss, uint8_t spi_bus, int clock_speed) {
-  _spi = new SPIClass(spi_bus);
+void Casket::begin(int pin_ss, long clock_speed, uint8_t spi_bus) {
   _pin_ss = pin_ss;
   if (clock_speed > CASKET_SPI_MAX_SPEED) {
     clock_speed = CASKET_SPI_MAX_SPEED;
   }
   _clock_speed = clock_speed;
   pinMode(_pin_ss, OUTPUT);
+#if defined(ARDUINO_TRINKET_M0)
+  _spi = &SPI;
+#elif defined(ARDUINO_M5Stick_C)
+  _spi = new SPIClass(HSPI);
+#else
+  _spi = new SPIClass(spi_bus);
+#endif
   _spi->begin();
 }
 
-void Casket::begin(int pin_sck, int8_t pin_miso, int pin_mosi, int pin_ss, uint8_t spi_bus, int clock_speed) {
-  _spi = new SPIClass(spi_bus);
+#if defined(ARDUINO_M5Stick_C) || defined(ARDUINO_M5Stack_Core_ESP32)
+void Casket::begin(int pin_sck, int8_t pin_miso, int pin_mosi, int pin_ss, long clock_speed, uint8_t spi_bus) {
   _pin_ss = pin_ss;
   if (clock_speed > CASKET_SPI_MAX_SPEED) {
     clock_speed = CASKET_SPI_MAX_SPEED;
   }
   _clock_speed = clock_speed;
   pinMode(_pin_ss, OUTPUT);
+#if defined(ARDUINO_M5Stick_C)
+  _spi = new SPIClass(HSPI);
+#else
+  _spi = new SPIClass(spi_bus);
+#endif
   _spi->begin(pin_sck, pin_miso, pin_mosi);
 }
+#endif
 
 void Casket::end() {
   _spi->end();

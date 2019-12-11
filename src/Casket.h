@@ -18,6 +18,13 @@
 #define CASKET_MEM_SIZE_LEDCOUNT  256 // チャネル当たりのLED数
 
 /* SPI */
+#if defined(ARDUINO_TRINKET_M0)
+#define CASKET_SPI_BUS_DEFAULT    NULL      // SPI標準使用バス
+#elif defined(ARDUINO_M5Stick_C)
+#define CASKET_SPI_BUS_DEFAULT    HSPI
+#elif defined(ARDUINO_M5Stack_Core_ESP32)
+#define CASKET_SPI_BUS_DEFAULT    VSPI
+#endif
 #define CASKET_SPI_MAX_SPEED      20000000  // SCLKの最大周波数 
 #define CASKET_SPI_SINGLE_READ    0xC0      // シングルリード時の送信データの上位2bit
 #define CASKET_SPI_SINGLE_WRITE   0x80      // シングルライト時の送信データの上位2bit
@@ -42,8 +49,10 @@
 
 class Casket {
   public:
-    void begin(int pin_ss, uint8_t spi_bus = HSPI, int clock_speed = CASKET_SPI_MAX_SPEED);
-    void begin(int pin_sck, int8_t pin_miso, int pin_mosi, int pin_ss, uint8_t spi_bus = HSPI, int clock_speed = CASKET_SPI_MAX_SPEED);
+    void begin(int pin_ss, long clock_speed = CASKET_SPI_MAX_SPEED, uint8_t spi_bus = CASKET_SPI_BUS_DEFAULT);
+#if defined(ARDUINO_M5Stick_C) || defined(ARDUINO_M5Stack_Core_ESP32)
+    void begin(int pin_sck, int8_t pin_miso, int pin_mosi, int pin_ss, long clock_speed = CASKET_SPI_MAX_SPEED, uint8_t spi_bus = CASKET_SPI_BUS_DEFAULT);
+#endif
     void end();
     uint32_t readSystemID();
     uint32_t readTimeCode();
